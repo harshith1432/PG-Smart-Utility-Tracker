@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PG Smart Utility Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div id="login-overlay">
+        <div class="login-card">
+            <h2>Welcome Home</h2>
+            <p style="color: #94a3b8; margin-bottom: 20px;">Please identify yourself to access utilities</p>
+            <input type="text" id="username" placeholder="Full Name" required>
+            <input type="text" id="room" placeholder="Room Number" required>
+            <button onclick="handleLogin()">Enter Dashboard</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <header style="display: flex; flex-direction: column; align-items: center; position: relative;">
+            <button id="logout-btn" onclick="logout()" class="hidden"
+                style="position: absolute; right: 0; top: 0; background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; cursor: pointer;">Logout</button>
+            <div id="user-display" class="hidden"
+                style="position: absolute; left: 0; top: 5px; font-size: 0.8rem; color: var(--text-muted);"></div>
+            <h1>🏢 PG Utility Tracker</h1>
+            <p class="subtitle">Live status of shared hostel resources</p>
+        </header>
+
+        <div id="dashboard" class="dashboard">
+            <!-- Utility cards will be injected here by JS -->
+            <div class="card loading">
+                <p>Loading status...</p>
+            </div>
+        </div>
+
+        <footer style="margin-top: 40px; text-align: center; color: var(--text-muted); font-size: 0.8rem;">
+            <p>Updates automatically every 10s • Made with 💙</p>
+        </footer>
+    </div>
+
+    <!-- Duration Modal for Washing Machine -->
+    <div id="duration-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>How long?</h3>
+            <p style="font-size: 0.9rem; margin: 10px 0; color: var(--text-muted);">Enter cycle duration in minutes</p>
+            <input type="number" id="wash-duration" value="30" min="1" max="240"
+                style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; margin-bottom: 15px;">
+            <div style="display: flex; gap: 10px;">
+                <button onclick="confirmWashing()"
+                    style="flex: 1; padding: 10px; background: #6366f1; border: none; border-radius: 8px; color: white; cursor: pointer;">Start</button>
+                <button onclick="closeModal()"
+                    style="flex: 1; padding: 10px; background: #334155; border: none; border-radius: 8px; color: white; cursor: pointer;">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
